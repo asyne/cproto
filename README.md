@@ -14,12 +14,33 @@ It's greatly useful for automated testing, debugging, profiling or even complica
 
 ## Getting Started
 
+#### Installing CProto
+
 Python *2.7* or *3.3+* is required to install **CProto**.
 
 Install the latest version using pip:
 
 ```sh
 $ pip install cproto
+```
+
+#### Running Chrome in Debug mode
+
+Option 1: [Run Chrome in Docker](#chrome-headless), also in Headless mode.
+
+Option 2: Run Chrome on host machine:
+
+```sh
+# «chrome» should point to your installation of Chrome
+chrome --remote-debugging-port=9222 "about:blank"
+
+# If you haven't created alias for Chrome yet, you could set it on MacOS like that:
+# For Chrome
+alias chrome="/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome"
+# For Chrome Canary
+alias chrome-canary="/Applications/Google\ Chrome\ Canary.app/Contents/MacOS/Google\ Chrome\ Canary"
+# For Chromium
+alias chromium="/Applications/Chromium.app/Contents/MacOS/Chromium"
 ```
 
 ## Documentation
