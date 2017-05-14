@@ -1,3 +1,5 @@
+from __future__ import absolute_import
+
 import json
 import base64
 
@@ -33,3 +35,6 @@ class CProto(object):
 
                 # Set Domain's Class as a property
                 setattr(self, domain_name, DomainClass)
+
+    def close(self):
+        self.ws.close()

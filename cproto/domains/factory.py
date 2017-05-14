@@ -19,7 +19,7 @@ def get_command(domain_name, command_name):
     return send_command
 
 def DomainFactory(domain_name, cmds):
-    klass = type(domain_name, (BaseDomain,), {})
+    klass = type(str(domain_name), (BaseDomain,), {})
 
     for c in cmds:
         command = get_command(domain_name, c['name'])
