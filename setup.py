@@ -1,16 +1,17 @@
-from setuptools import setup
+from setuptools import setup, find_packages
 from codecs import open
 from os import path
 
 
 ROOT_DIR = path.abspath(path.dirname(__file__))
+EXCLUDE_FROM_PACKAGES = ['examples', 'tests', 'tools']
 
-with open(path.join(ROOT_DIR, 'README.md'), encoding='utf-8') as f:
+with open(path.join(ROOT_DIR, 'README.rst'), encoding='utf-8') as f:
     long_description = f.read()
 
 setup(
     name='cproto',
-    version='0.1',
+    version='0.1.8',
     description='Chrome Debugging Protocol client',
     long_description=long_description,
     url='https://github.com/asyne/cproto',
@@ -34,6 +35,9 @@ setup(
         'Programming Language :: Python :: 3.6',
     ],
     keywords='chrome debug client',
-    packages=['cproto'],
+    packages=find_packages(exclude=EXCLUDE_FROM_PACKAGES),
+    package_data={
+        'cproto': ['resources/*.json'],
+    },
     install_requires=['websocket-client'],
 )
