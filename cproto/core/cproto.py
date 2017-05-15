@@ -24,7 +24,7 @@ class CProto(object):
         url = json.loads(res.read())[0]['webSocketDebuggerUrl']
         self.ws = create_connection(url)
 
-        with open(ROOT_DIR + '/resources/protocol.json', 'rb') as f:
+        with open(path.join(ROOT_DIR, 'resources/protocol.json'), 'rb') as f:
             data = json.loads(f.read())
 
         for d in data['domains']:
