@@ -2,7 +2,7 @@
 
 **CProto** is a Debugging Protocol client that supports Chrome, Chromium and Blink based browsers.
 
-**CProto** provides you an advanced interface to interact with Headless Chrome instance from your Python code.
+**CProto** provides you an advanced interface to interact with Chrome (or another supported browser) instance from your Python code.
 It's greatly useful for automated testing, debugging, profiling or even complicated page crawling.
 
 - [Getting Started](#getting-started)
@@ -57,7 +57,6 @@ cp = CProto(host='127.0.0.1', port=9222)
 
 # Use Page to navigate to github.com.
 cp.Page.navigate(url='https://github.com')
-
 ```
 
 As you see, [Page Domain API](https://chromedevtools.github.io/devtools-protocol/tot/Page/) could be used to navigate any arbitrary URL (github in this case). There are a whole bunch of other methods and events available for each Domain, so you could browse all of them in the CDP documentation.
@@ -77,9 +76,10 @@ $ docker run --rm -it --cap-add=SYS_ADMIN -p 9222:9222 headless
 # You could check it out by opening this link in your browser – http://localhost:9222.
 ```
 
-
 ## Examples
 
 Check out [examples](https://github.com/asyne/cproto/tree/master/examples) directory.
+
+- [Take a Screenshot](https://github.com/asyne/cproto/blob/master/examples/screenshot.py)
 
 *More examples are coming soon.*
