@@ -7,6 +7,7 @@ It's greatly useful for automated testing, debugging, profiling or even complica
 
 - [Getting Started](#getting-started)
 - [Documentation](#documentation)
+- [Roadmap](#roadmap)
 - [Chrome Headless](#chrome-headless)
 - [Examples](#examples)
 
@@ -60,6 +61,13 @@ cp.Page.navigate(url='https://github.com')
 ```
 
 As you see, [Page Domain API](https://chromedevtools.github.io/devtools-protocol/tot/Page/) could be used to navigate any arbitrary URL (github in this case). There are a whole bunch of other methods and events available for each Domain, so you could browse all of them in the CDP documentation.
+
+## Roadmap
+
+- [x] Domains support
+- [ ] Events support
+- [ ] Types support
+- TBA – suggestions are welcome
 
 ## Chrome Headless
 
