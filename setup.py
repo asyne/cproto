@@ -11,7 +11,7 @@ with open(path.join(ROOT_DIR, 'README.rst'), encoding='utf-8') as f:
 
 setup(
     name='cproto',
-    version='0.1.8',
+    version='0.1.9',
     description='Chrome Debugging Protocol client',
     long_description=long_description,
     url='https://github.com/asyne/cproto',
