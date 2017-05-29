@@ -4,7 +4,7 @@ import json
 class BaseDomain(object):
     @classmethod
     def send(cls, req):
-        data = cls.ws.send(json.dumps(req))
+        data = cls.ws.send_message(req)
         return data
 
 

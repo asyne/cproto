@@ -18,11 +18,27 @@ from cproto.domains.factory import DomainFactory
 ROOT_DIR = path.abspath(path.dirname(path.dirname(__file__)))
 
 
+class Replies(object):
+    def __init__(self):
+        self.replies = {}
+
+    def __getitem__(self, reply_id):
+        reply = self.replies[reply_id]
+        del self.replies[reply_id]
+        return reply
+
+    def __setitem__ (self, reply_id, message):
+        self.replies[reply_id] = message
+
+
 class WS(WebSocket):
     def __init__(self, on_message):
         super(self.__class__, self).__init__()
 
         self.on_message = on_message
+        self.cLock = threading.Condition()
+        self.request_id = 1
+        self.replies = Replies()
 
     def connect(self, *args, **kwargs):
         super(self.__class__, self).connect(*args, **kwargs)
@@ -30,11 +46,32 @@ class WS(WebSocket):
         read_th = threading.Thread(target=self.read_stream)
         read_th.start()
 
+    def send_message(self, data):
+        request_id = self.request_id
+        self.request_id += 1
+
+        data['id'] = request_id
+        self.send(json.dumps(data))
+
+        with self.cLock:
+            self.cLock.wait()
+
+        reply = self.replies[request_id]
+        return reply
+
     def read_stream(self):
         while self.connected:
-            data = self.recv()
-            if data:
-                self.on_message(json.loads(data))
+            with self.cLock:
+                r, w, e = select.select([self.sock], [], [], 0)
+                if r:
+                    data = self.recv()
+                    message = json.loads(data)
+
+                    if 'id' in message:
+                        self.replies[message['id']] = message
+                        self.cLock.notify()
+                    else:
+                        self.on_message(message)
 
 class CProto(object):
 
@@ -61,12 +98,11 @@ class CProto(object):
             setattr(self, domain_name, DomainClass)
 
     def on_message(self, message):
-        if 'method' in message:
-            domain_name, method_name = message['method'].split('.')
-            domain = getattr(self, domain_name)
+        domain_name, method_name = message['method'].split('.')
+        domain = getattr(self, domain_name)
 
-            if hasattr(domain, method_name):
-                getattr(domain, method_name)(message['params'])
+        if hasattr(domain, method_name):
+            getattr(domain, method_name)(message['params'])
 
     def close(self):
         self.ws.close()
