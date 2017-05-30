@@ -4,8 +4,8 @@ import json
 class BaseDomain(object):
     @classmethod
     def send(cls, req):
-        cls.ws.send(json.dumps(req))
-        return cls.ws.recv()
+        data = cls.ws.send_message(req)
+        return data
 
 
 def get_command(domain_name, command_name):
