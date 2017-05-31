@@ -1,6 +1,3 @@
-import json
-
-
 class BaseDomain(object):
     @classmethod
     def send(cls, req):
@@ -17,6 +14,7 @@ def get_command(domain_name, command_name):
         })
 
     return send_command
+
 
 def DomainFactory(domain_name, cmds):
     klass = type(str(domain_name), (BaseDomain,), {})

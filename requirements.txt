@@ -1,1 +1,4 @@
-websocket-client==0.40.0
+-r requirements/development.txt
+-r requirements/testing.txt
+-r requirements/codestyle.txt
+-r requirements/packaging.txt

@@ -1,7 +1,6 @@
 from __future__ import absolute_import
 
 import json
-import base64
 import threading
 import select
 from os import path
@@ -10,7 +9,7 @@ try:
 except ImportError:
     from urllib2 import urlopen
 
-from websocket import create_connection, WebSocket
+from websocket import WebSocket
 
 from cproto.domains.factory import DomainFactory
 
@@ -27,7 +26,7 @@ class Replies(object):
         del self.replies[reply_id]
         return reply
 
-    def __setitem__ (self, reply_id, message):
+    def __setitem__(self, reply_id, message):
         self.replies[reply_id] = message
 
 
@@ -72,6 +71,7 @@ class WS(WebSocket):
                         self.cLock.notify()
                     else:
                         self.on_message(message)
+
 
 class CProto(object):
 

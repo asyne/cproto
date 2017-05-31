@@ -12,5 +12,6 @@ def do_capture():
     with open('output.jpeg', 'wb') as f:
         f.write(data)
 
+
 if __name__ == '__main__':
     do_capture()
