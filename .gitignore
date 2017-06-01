@@ -3,6 +3,7 @@
 *.pyc
 *.rst
 
+.cache/
 __pycache__/
 tools/
 dist/
