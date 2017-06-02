@@ -1,4 +1,5 @@
 .DS_STORE
+.coverage
 *.log
 *.pyc
 *.rst
