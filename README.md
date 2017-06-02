@@ -66,7 +66,7 @@ As you see, [Page Domain API](https://chromedevtools.github.io/devtools-protocol
 
 - [x] Domains support
 - [x] Methods support
-- [ ] Events support
+- [x] Events support
 - [ ] Types support
 - TBA – suggestions are welcome
 
