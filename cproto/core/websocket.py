@@ -52,9 +52,10 @@ class WebSocket(BaseWebSocket):
 
     def _read_messages(self):
         while self.connected:
-            with self.cLock:
-                r, w, e = select.select([self.sock], [], [], 0)
-                if r:
+            r, w, e = select.select([self.sock], [], [])
+
+            if r and self.connected:
+                with self.cLock:
                     data = self.recv()
                     message = json.loads(data)
 
