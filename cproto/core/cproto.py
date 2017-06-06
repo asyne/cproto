@@ -32,10 +32,10 @@ class CProto(object):
             DomainClass = DomainFactory(domain_name, d['commands'])
 
             # Set WebSocket attribute
-            setattr(DomainClass, 'ws', self.ws)
+            DomainClass.ws = self.ws
 
             # Set Domain's Class as a property
-            setattr(self, domain_name, DomainClass)
+            setattr(self, domain_name, DomainClass())
 
     def close(self):
         self.ws.close()

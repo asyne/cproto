@@ -87,7 +87,7 @@ $ docker run --rm -it --cap-add=SYS_ADMIN -p 9222:9222 headless
 
 ## Examples
 
-Check out [examples](https://github.com/asyne/cproto/tree/master/examples) directory.
+Check out [examples directory](https://github.com/asyne/cproto/tree/master/examples).
 
 - [Take a Screenshot](https://github.com/asyne/cproto/blob/master/examples/screenshot.py)
 
