@@ -1,1 +1,1 @@
-from .core.cproto import CProto
+from .core.cproto import CProto  # noqa
