@@ -1,17 +1,18 @@
-import json
-import base64
-
 from cproto import CProto
 
 
-def do_capture():
-    cp = CProto()
-    payload = json.loads(cp.Page.captureScreenshot())
-    data = base64.b64decode(payload['result']['data'])
+def capture_screen(_):
+    payload = cp.Page.captureScreenshot()
+    data = payload['result']['data'].decode('base64')
 
     with open('output.jpeg', 'wb') as f:
         f.write(data)
 
+    cp.close()
+
 
 if __name__ == '__main__':
-    do_capture()
+    cp = CProto()
+    cp.Page.enable()
+    cp.Page.loadEventFired = capture_screen
+    cp.Page.navigate(url='https://github.com')
