@@ -6,7 +6,7 @@
 It's greatly useful for automated testing, debugging, profiling or even complicated page crawling.
 
 - [Getting Started](#getting-started)
-- [Documentation](#documentation)
+- [API Docs](#documentation)
 - [Roadmap](#roadmap)
 - [Chrome Headless](#chrome-headless)
 - [Examples](#examples)
@@ -44,7 +44,7 @@ alias chrome-canary="/Applications/Google\ Chrome\ Canary.app/Contents/MacOS/Goo
 alias chromium="/Applications/Chromium.app/Contents/MacOS/Chromium"
 ```
 
-## Documentation
+## API Docs
 
 [Chrome Debugging Protocol documentation.](https://chromedevtools.github.io/devtools-protocol/)
 
@@ -53,14 +53,24 @@ alias chromium="/Applications/Chromium.app/Contents/MacOS/Chromium"
 ```python
 from cproto import CProto
 
-# Create CProto instance and connect to Chrome over CDP
-cp = CProto(host='127.0.0.1', port=9222)
 
-# Use Page to navigate to github.com.
+# Print event's response and close CProto connection
+def on_load(response):
+    print(response)
+    cp.close()
+
+
+# Create CProto instance and connect to a browser over CDP
+cp = CProto(host='127.0.0.1', port=9222)
+# Enable Page domain events
+cp.Page.enable()
+# Adds Page callback that's fired after is loaded
+cp.Page.loadEventFired = on_load
+# Navigate browser to Github
 cp.Page.navigate(url='https://github.com')
 ```
 
-As you see, [Page Domain API](https://chromedevtools.github.io/devtools-protocol/tot/Page/) could be used to navigate any arbitrary URL (github in this case). There are a whole bunch of other methods and events available for each Domain, so you could browse all of them in the CDP documentation.
+In this example [Page Domain API](https://chromedevtools.github.io/devtools-protocol/tot/Page/) was used to navigate to any arbitrary URL. There are a whole bunch of other methods and events available for each Domain, you could browse all of them on the CDP documentation website.
 
 ## Roadmap
 
