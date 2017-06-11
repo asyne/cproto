@@ -10,10 +10,5 @@ class TestMethods:
         self.cp.close()
 
     def test_navigate_reply(self):
-        res = self.cp.Page.navigate(url='about:blank')
-
-        assert res['id'] == 1
-
-        res = self.cp.Page.navigate(url='about:blank')
-
-        assert res['id'] == 2
+        assert self.cp.Page.navigate(url='about:blank')['id'] == 1, 'Should have initial request id'
+        assert self.cp.Page.navigate(url='about:blank')['id'] == 2, 'Should have (initial + 1) request id'
