@@ -41,6 +41,11 @@ class WebSocket(BaseWebSocket):
         threading.Thread(target=self._read_messages).start()
         threading.Thread(target=self._process_events).start()
 
+    def close(self):
+        # Terminates blocking `get` call on events processing thread
+        self.events.put(None)
+        return super(self.__class__, self).close()
+
     def send_message(self, method, params):
         request_id = self.request_id
         self.request_id += 1
@@ -67,8 +72,8 @@ class WebSocket(BaseWebSocket):
                     data = self.recv()
                     message = json.loads(data)
 
-                    # If id is present -> notify main thread to return message as a reply
-                    # Otherwise put message into events queue so it will be dispatched as event
+                    # If id is present -> notifies main thread to return this message as a reply
+                    # Otherwise puts message into events queue so it will be dispatched as event
                     if 'id' in message:
                         self.replies[message['id']] = message
                         self.cLock.notify()
@@ -78,4 +83,9 @@ class WebSocket(BaseWebSocket):
     def _process_events(self):
         while self.connected:
             event = self.events.get()
+
+            # `None` is standing as a null terminator event
+            if event is None:
+                break
+
             self._on_event(event)
