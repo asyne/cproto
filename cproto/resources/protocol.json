@@ -1,6 +1,19 @@
 {
     "version": { "major": "1", "minor": "2" },
     "domains": [{
+        "domain": "Runtime",
+        "types": [],
+        "commands": [
+            {
+                "name": "evaluate",
+                "description": "Evaluates expression on global object."
+            },
+            {
+                "name": "getProperties",
+                "description": "Returns properties of a given object. Object group of the result is inherited from the target object."
+            }
+        ]
+      },{
         "domain": "Inspector",
         "experimental": true,
         "types": [],
