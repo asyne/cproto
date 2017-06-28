@@ -7,6 +7,10 @@
             {
                 "name": "evaluate",
                 "description": "Evaluates expression on global object."
+            },
+            {
+                "name": "getProperties",
+                "description": "Returns properties of a given object. Object group of the result is inherited from the target object."
             }
         ]
       },{
