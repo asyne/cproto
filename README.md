@@ -6,7 +6,7 @@
 It's greatly useful for automated testing, debugging, profiling or even complicated page crawling.
 
 - [Getting Started](#getting-started)
-- [API Docs](#documentation)
+- [API Docs](#api-docs)
 - [Roadmap](#roadmap)
 - [Chrome Headless](#chrome-headless)
 - [Examples](#examples)

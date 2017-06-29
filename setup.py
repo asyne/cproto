@@ -6,12 +6,15 @@ from os import path
 ROOT_DIR = path.abspath(path.dirname(__file__))
 EXCLUDE_FROM_PACKAGES = ['examples', 'tests', 'tools', 'requirements']
 
-with open(path.join(ROOT_DIR, 'README.rst'), encoding='utf-8') as f:
-    long_description = f.read()
+try:
+    with open(path.join(ROOT_DIR, 'README.rst'), encoding='utf-8') as f:
+        long_description = f.read()
+except:
+    long_description = ''
 
 setup(
     name='cproto',
-    version='0.4.0',
+    version='0.5',
     description='Chrome Debugging Protocol client',
     long_description=long_description,
     url='https://github.com/asyne/cproto',
@@ -19,7 +22,7 @@ setup(
     author_email='cproto+asyne.inout@gmail.com',
     license='MIT',
     classifiers=[
-        'Development Status :: 3 - Alpha',
+        'Development Status :: 4 - Beta',
         'Intended Audience :: Developers',
         'Topic :: Internet :: WWW/HTTP :: Browsers',
         'Topic :: Software Development :: Debuggers',
