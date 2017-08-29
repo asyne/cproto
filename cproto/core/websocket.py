@@ -8,7 +8,8 @@ try:
 except ImportError:
     from Queue import Queue
 
-from websocket import WebSocket as BaseWebSocket
+from websocket import WebSocket as BaseWebSocket,\
+    WebSocketConnectionClosedException
 
 
 class Replies(object):
@@ -47,18 +48,18 @@ class WebSocket(BaseWebSocket):
         return super(self.__class__, self).close()
 
     def send_message(self, method, params):
-        request_id = self.request_id
-        self.request_id += 1
-
-        payload = json.dumps({
-            'id': request_id,
-            'method': method,
-            'params': params,
-        })
-        self.send(payload)
-
-        # Wait until response is ready
         with self.cLock:
+            request_id = self.request_id
+            self.request_id += 1
+
+            payload = json.dumps({
+                'id': request_id,
+                'method': method,
+                'params': params,
+            })
+            self.send(payload)
+
+            # Wait until response is ready
             self.cLock.wait()
 
         return self.replies[request_id]
@@ -69,7 +70,10 @@ class WebSocket(BaseWebSocket):
 
             if r and self.connected:
                 with self.cLock:
-                    data = self.recv()
+                    try:
+                        data = self.recv()
+                    except WebSocketConnectionClosedException:
+                        continue
                     message = json.loads(data)
 
                     # If id is present -> notifies main thread to return this message as a reply
