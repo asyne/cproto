@@ -14,7 +14,7 @@ except:
 
 setup(
     name='cproto',
-    version='0.5',
+    version='0.5.1',
     description='Chrome Debugging Protocol client',
     long_description=long_description,
     url='https://github.com/asyne/cproto',
