@@ -66,7 +66,10 @@ class WebSocket(BaseWebSocket):
 
     def _read_messages(self):
         while self.connected:
-            r, w, e = select.select([self.sock], [], [])
+            try:
+                r, w, e = select.select([self.sock], [], [])
+            except:
+                continue
 
             if r and self.connected:
                 with self.cLock:
