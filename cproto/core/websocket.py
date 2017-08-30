@@ -72,7 +72,7 @@ class WebSocket(BaseWebSocket):
                 with self.cLock:
                     try:
                         data = self.recv()
-                    except WebSocketConnectionClosedException:
+                    except:
                         continue
                     message = json.loads(data)
 
