@@ -10,6 +10,7 @@ except ImportError:
 from cproto.core.websocket import WebSocket
 from cproto.domains.factory import DomainFactory
 
+
 ROOT_DIR = path.abspath(path.dirname(path.dirname(__file__)))
 
 
