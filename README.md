@@ -77,8 +77,9 @@ In this example [Page Domain API](https://chromedevtools.github.io/devtools-prot
 - [x] Domains support
 - [x] Methods support
 - [x] Events support
-- [ ] Types support
-- TBA – suggestions are welcome
+
+Under consideration:
+- Asynchronous I/O support using **asyncio**
 
 ## Chrome Headless
 

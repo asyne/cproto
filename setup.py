@@ -7,14 +7,15 @@ ROOT_DIR = path.abspath(path.dirname(__file__))
 EXCLUDE_FROM_PACKAGES = ['examples', 'tests', 'tools', 'requirements']
 
 try:
-    with open(path.join(ROOT_DIR, 'README.rst'), encoding='utf-8') as f:
-        long_description = f.read()
+    from tools.convert_markdown import md2rst
+
+    long_description = md2rst()
 except:
     long_description = ''
 
 setup(
     name='cproto',
-    version='0.5',
+    version='0.6.0',
     description='Chrome Debugging Protocol client',
     long_description=long_description,
     url='https://github.com/asyne/cproto',
