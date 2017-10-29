@@ -81,18 +81,21 @@ In this example [Page Domain API](https://chromedevtools.github.io/devtools-prot
 Under consideration:
 - Asynchronous I/O support using **asyncio**
 
-## Chrome Headless
+## Headless Chrome in Docker
 
-While Chrome Headless mode is only available for Linux (MacOS coming soon), you could use [Docker](https://www.docker.com/) to run Headless mode on any major OS.
+You could use [Docker](https://www.docker.com/) to run **CProto** with Chrome Headless mode on any major OS via *command line interface*.
 
 ```sh
-# Build Docker image for Chrome Headless:
-$ docker build -t headless .
+# Clone the repository
+$ git clone git@github.com:asyne/cproto.git
 
-# Run Docker Chrome Headless mode container with port 9222 being proxied to the host machine:
-$ docker run --rm -it --cap-add=SYS_ADMIN -p 9222:9222 headless
+# Build Docker image for Chrome Headless
+$ docker build -t chrome-headless cproto
 
-# That's all here. Chrome Debugging interface is now listening for connections.
+# Run Docker Chrome Headless mode container with port 9222 being proxied to the host machine
+$ docker run --rm -it --cap-add=SYS_ADMIN -p 9222:9222 chrome-headless
+
+# That's all here. Chrome Debugging interface is now up and listening for connections.
 # You could check it out by opening this link in your browser – http://localhost:9222.
 ```
 
