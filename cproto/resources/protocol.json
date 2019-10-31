@@ -13102,7 +13102,8 @@
                         "neutral",
                         "insecure",
                         "secure",
-                        "info"
+                        "info",
+                        "insecure-broken"
                     ]
                 },
                 {
